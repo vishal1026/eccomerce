@@ -28,13 +28,13 @@ export class ProductsView extends React.Component {
     productViewImages = (obj, index) => {
         return (
             <div className='mt-3' key={index}>
-                <Card>
-                    <img alt='' className='p-3' src={commonImageUrl+obj.src} width={100} height={100} />
+                <Card style={{alignItems:'center', width:'200px', height:'270'}}>
+                    <img alt='' className='p-3' src={commonImageUrl+obj.src} width={150} height={150} />
                     <CardBody>
-                        <CardTitle>{obj.name}</CardTitle>
-                        <CardSubtitle>{obj.description}</CardSubtitle>
-                        <CardText className='text-danger'><i className="fa fa-inr"></i> {obj.price}</CardText>
-                        <Button value={index} id='addToCartButton' onClick={this.addToCart}  disabled = {(obj.inCart) ? true : false}> Add to cart</Button>
+                        <CardTitle className='text-center'>{obj.name}</CardTitle>
+                        <CardSubtitle className='text-center'>{obj.description}</CardSubtitle>
+                        <CardText className='text-center text-danger'><i className="fa fa-inr"></i> {obj.price}</CardText>
+                        <Button size = 'sm' outline value={index} id='addToCartButton' onClick={this.addToCart}  disabled = {(obj.inCart) ? true : false}> Add to cart</Button>
                     </CardBody>
                 </Card>
             </div>
@@ -66,11 +66,12 @@ export class ProductsView extends React.Component {
                 <Row key={index} style={{display:'inherit'}}>
                     <Card>
                         <CardBody>
-                        <Col>   <img alt='' className='p-3' src={commonImageUrl+obj.src} width={100} height={100}/></Col>
-                        <Col>   <span style={{marginLeft:'100px'}}>{obj.name}</span></Col>
-                        <Col>    <span style={{marginLeft:'100px'}} className='text-danger'><i className='fa fa-inr'></i> {obj.price}</span></Col>
-                        <Col>    <label style={{marginLeft:'100px'}}>
-                            Quantity :
+                        <Row>
+                        <Col sm={2}><img alt='' className='p-3' src={commonImageUrl+obj.src} width={100} height={100}/></Col>
+                        <Col  style = {{marginTop:'35px'}} sm={3}>{obj.name}</Col>
+                        <Col  style = {{marginTop:'35px'}} sm={2}><i className='text-danger fa fa-inr'>  {obj.price}</i></Col>
+                        <Col  style = {{marginTop:'35px'}} sm={4}><label>
+                            Quantity :  
                             <select value={obj.quantity} id={index} onChange={this.selectQuantity}>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
@@ -84,7 +85,9 @@ export class ProductsView extends React.Component {
                                 <option value='10'>10</option>
                             </select>
                             </label></Col>
-                            <Col>    <Button onClick = {this.deleteItemFromCart} value={index} color='link' style={{ color:'red', marginTop:'30px', float:'right' }}>Remove</Button></Col>
+                            <Col sm={1}>
+                                <Button onClick = {this.deleteItemFromCart} value={index} color='link' style={{ color:'red', marginTop:'30px', float:'right' }}>Remove</Button></Col>
+                            </Row>
                         </CardBody>
                     </Card>
                 </Row>
@@ -104,7 +107,7 @@ export class ProductsView extends React.Component {
                     <hr/>
                     <span>Payeble Amount </span><span className='float-right'><i className="fa fa-inr"></i> { totalPrice + deliveryCharges }</span>
                     </CardText>
-                    <Button block>Proceed to buy</Button>
+                    <Button  size = 'sm' block>Proceed to buy</Button>
                 </CardBody>
                 </Card>
             </Col>:<React.Fragment></React.Fragment>
@@ -132,8 +135,8 @@ export class ProductsView extends React.Component {
         let {productData} = this.state;
         return(
             <div style={{marginLeft:'100px', marginTop:'50px'}}>
-                <Row>
-                    {(this.state.checkOutButton && !this.state.checkOutView) && <Button id='checkOutButton' onClick={this.checkOut}> Check Out</Button>}
+                <Row style={{ marginLeft :'0px'}}>
+                    {(this.state.checkOutButton && !this.state.checkOutView) && <Button id='checkOutButton' outline onClick={this.checkOut} > Check Out</Button>}
                 </Row>
                 {
                     (this.state.checkOutView) ?
